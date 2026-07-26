@@ -17,6 +17,10 @@ string readFileContents(const string &pathStr)
 void writeFileContents(const string &pathStr, const string &data)
 {
     std::filesystem::path p(pathStr);
+    if (pathStr.find(".git/objects/") != string::npos && std::filesystem::exists(p))
+    {
+        return;
+    }
     if (!p.parent_path().empty())
         std::filesystem::create_directories(p.parent_path());
 

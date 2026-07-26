@@ -19,6 +19,8 @@ int handleCommands(int argc, char *argv[])
         return handleLsTree(argc, argv);
     else if (command == "write-tree")
         return handleWriteTree(argc, argv);
+    else if (command == "commit-tree")
+        return handleCommitTree(argc, argv);
     else
     {
         return error("Unknown command " + command);
