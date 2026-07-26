@@ -15,6 +15,7 @@ int handleHashObject(int argc, char *argv[]);
 int handleLsTree(int argc, char *argv[]);
 int handleWriteTree(int argc, char *argv[]);
 int handleCommitTree(int argc, char *argv[]);
+int handleClone(int argc, char *argv[]);
 
 // constants (defined in src/constants.cpp)
 extern const int REGULAR_FILE;

@@ -21,6 +21,8 @@ int handleCommands(int argc, char *argv[])
         return handleWriteTree(argc, argv);
     else if (command == "commit-tree")
         return handleCommitTree(argc, argv);
+    else if (command == "clone")
+        return handleClone(argc, argv);
     else
     {
         return error("Unknown command " + command);
