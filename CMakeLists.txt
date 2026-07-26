@@ -10,6 +10,7 @@ find_package(OpenSSL REQUIRED)
 find_package(ZLIB REQUIRED)
 
 add_executable(git ${SOURCE_FILES})
+target_include_directories(git PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(git PRIVATE OpenSSL::Crypto)
 target_link_libraries(git PRIVATE ZLIB::ZLIB)
