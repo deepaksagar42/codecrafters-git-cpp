@@ -1,12 +1,12 @@
 #ifndef COMMANDS_HPP
 #define COMMANDS_HPP
 
-#include <filesystem>
-#include <string>
-#include <iostream>
-#include <vector>
 #include <exception>
+#include <filesystem>
 #include <headers/helpers.hpp>
+#include <iostream>
+#include <string>
+#include <vector>
 
 int handleCommands(int argc, char *argv[]);
 int handleInit(int argc, char *argv[]);

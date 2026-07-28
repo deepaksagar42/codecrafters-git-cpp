@@ -8,7 +8,6 @@ int handleCatFile(int argc, char *argv[])
     {
        return error("Usage: cat-file -p <object_sha>");
     }
-
     string mode = argv[2];
     if (mode != "-p")
     {
@@ -16,7 +15,7 @@ int handleCatFile(int argc, char *argv[])
         return EXIT_FAILURE;
     }
     string arg = static_cast<string>(argv[3]);
-    if (arg.size() < 3)
+    if (arg.size() !=40)
     {
         return error("Invalid object hash.");
     }
@@ -47,7 +46,7 @@ int handleCatFile(int argc, char *argv[])
         return error("Failed to decompress object file.");
     }
 
-    size_t nullPos = decompressed.find('\0');
+    size_t nullPos = decompressed.find('\0'); // size_t is unsgined , int is signed
     if (nullPos != string::npos)
     {
         cout << decompressed.substr(nullPos + 1);

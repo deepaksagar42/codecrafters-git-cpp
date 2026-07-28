@@ -1,7 +1,7 @@
 #include <headers/commands.hpp>
 using namespace std;
 
-int handleCommands(int argc, char *argv[])
+int handleCommands(int argc, char *argv[]) //argumented vector of strings, argc is the number of arguments, argv is the array of arguments
 {
     if (argc < 2)
     {

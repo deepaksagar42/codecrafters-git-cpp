@@ -22,8 +22,8 @@ int handleInit(int argc, char *argv[])
     }
     catch (const filesystem_error &e)
     {
-        return error(string(e.what()));
+        return error(string(e.what()));   // e.what() is a standard method used to get a human-readable description of an exception (error)
     }
 
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS;   //0 means succefful execution, 1 means error
 }

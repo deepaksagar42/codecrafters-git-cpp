@@ -8,13 +8,12 @@ int handleLsTree(int argc, char *argv[])
     {
        return error("Usage: ls-tree --name-only <tree_sha>");
     }
-
     string mode = argv[2];
     if (mode != "--name-only")
     {
        return error("mode not supported");
     }
-    string sha = static_cast<string>(argv[3]);
+    string sha = argv[3];
     string dir = sha.substr(0, 2);
     string file_name = sha.substr(2);
     string path = ".git/objects/" + dir + "/" + file_name;
@@ -28,31 +27,26 @@ int handleLsTree(int argc, char *argv[])
         return error(string("cannot open file ") + path + ": " + e.what());
     }
     string decompressed = decompressZlib(content);
-    size_t nullPos = decompressed.find('\0');
-    if (nullPos == string::npos)
-    {
-        return error("Invalid object format: header separator not found.");
-    }
-    size_t i = nullPos + 1;
-    while (i < decompressed.size())
-    {
-        // Find space after mode
-        size_t spacePos = decompressed.find(' ', i);
-        if (spacePos == string::npos)
-            break;
-        string mode = decompressed.substr(i, spacePos - i);
+    //   this will be format after decompress
+    //    tree <size>\0
+    //   <mode> <name>\0<20_byte_sha>
+    //   <mode> <name>\0<20_byte_sha>
+    int i = decompressed.find('\0') + 1;
 
-        // Find null after name
-        size_t nullPosEntry = decompressed.find('\0', spacePos);
-        if (nullPosEntry == string::npos)
-            break;
-        string name = decompressed.substr(spacePos + 1, nullPosEntry - spacePos - 1);
+        while (i < decompressed.size())
+        {
+            if (decompressed[i] == ' ')
+            {
+                int st = i + 1;
+                int en = decompressed.find('\0', st);
 
-        // Skip SHA (20 bytes)
-        i = nullPosEntry + 1 + 20;
+                cout << decompressed.substr(st, en - st) << '\n';
 
-        // Print name
-        cout << name << endl;
-    }
+                i = en + 1 + 20;
+                continue;
+            }
+
+            i++;
+        }
     return EXIT_SUCCESS;
 }

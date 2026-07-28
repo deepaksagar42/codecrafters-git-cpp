@@ -9,14 +9,13 @@ int handleHashObject(int argc, char *argv[])
         cerr << "Usage: hash-object -w <string>\n";
         return EXIT_FAILURE;
     }
-
     string mode = argv[2];
     if (mode != "-w")
     {
         cerr << mode << '\n';
         return EXIT_FAILURE;
     }
-    string arg = static_cast<string>(argv[3]);
+    string arg = argv[3];
     string file_contents;
     try
     {
