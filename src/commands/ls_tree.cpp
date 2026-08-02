@@ -1,7 +1,6 @@
 #include <headers/commands.hpp>
 using namespace std;
 using namespace std::filesystem;
-
 int handleLsTree(int argc, char *argv[])
 {
     if (argc < 4)
@@ -32,20 +31,16 @@ int handleLsTree(int argc, char *argv[])
     //   <mode> <name>\0<20_byte_sha>
     //   <mode> <name>\0<20_byte_sha>
     int i = decompressed.find('\0') + 1;
-
-        while (i < decompressed.size())
+        while (i < decompressed.size()
         {
             if (decompressed[i] == ' ')
             {
                 int st = i + 1;
                 int en = decompressed.find('\0', st);
-
                 cout << decompressed.substr(st, en - st) << '\n';
-
                 i = en + 1 + 20;
                 continue;
             }
-
             i++;
         }
     return EXIT_SUCCESS;

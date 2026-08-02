@@ -63,10 +63,10 @@ string write_tree_blob(const string &content)
     return sha;
 }
 
-pair<string, string> map_directory(path p, std::error_code ec)
+std::pair<string, string> map_directory(path p, std::error_code  & ec) //passsing ec by refernce
 {
-    string content = "";
-    if (is_directory(p, ec))
+     string content = "";
+     if (is_directory(p, ec))
     {
         vector<directory_entry> entries;
         for (auto &entry : directory_iterator(p, ec))
@@ -88,7 +88,6 @@ pair<string, string> map_directory(path p, std::error_code ec)
             if (entry.is_directory())
             {
                 auto [child_content, child_sha] = map_directory(entry.path(), ec);
-                (void)child_content;
                 content += to_string(DIRR) + " " + entry.path().filename().string() + '\0' +
                            sha1_byte("tree " + to_string(child_content.size()) + '\0' + child_content);
             }
@@ -98,13 +97,14 @@ pair<string, string> map_directory(path p, std::error_code ec)
             }
         }
     }
-    else
-    {
+     else
+     {
         content = makeTreeBlobFromFile(p.string(), p.filename().string());
-    }
-    string sha = write_tree_blob(content);
-    return {content, sha};
-}
+      }
+      string sha = write_tree_blob(content);
+      return {content, sha};
+  }
+
 path findRepoRoot(path start)
 {
     error_code ec;
