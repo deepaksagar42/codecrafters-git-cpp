@@ -13,10 +13,10 @@ int handleWriteTree(int argc, char *argv[])
         if(ec)
         {
             std::cerr << "OS error accessing path" << ec.message() << "\n";
-            return;
+            return EXIT_FAILURE;
         }
         std::cerr << "Path does not exist: " + p.string() << "\n";
-        return ;
+        return EXIT_FAILURE;
     }
     string sha = map_directory(p, ec).second;
     cout << sha << endl;
