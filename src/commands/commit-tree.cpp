@@ -10,10 +10,9 @@ int handleCommitTree(int argc, char *argv[])
 {
     if (argc < 4)
     {
-        cerr << "Usage: commit-tree <tree_sha> [-p <parent_sha>]* -m <message>\n";
+        cerr << "Usage: git commit-tree <tree_sha> [-p <parent_sha>]* -m <message>\n";
         return EXIT_FAILURE;
     }
-
     string tree_sha = argv[2];
     vector<string> parents;
     string message = "";
@@ -43,7 +42,7 @@ int handleCommitTree(int argc, char *argv[])
             }
             else
             {
-                cerr << "Error: -m option requires a message\n";
+                cerr << "Error: -m option requires a message\n";//its unbuffered so it print instantly
                 return EXIT_FAILURE;
             }
         }
@@ -62,7 +61,7 @@ int handleCommitTree(int argc, char *argv[])
 
     // Build the commit object contents
     string content = "tree " + tree_sha + "\n";
-    for (const auto &parent : parents)
+    for ( auto &parent : parents)
     {
         content += "parent " + parent + "\n";
     }

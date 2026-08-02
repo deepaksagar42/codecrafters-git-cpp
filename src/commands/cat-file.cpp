@@ -14,7 +14,7 @@ int handleCatFile(int argc, char *argv[])
         cerr << mode << '\n';
         return EXIT_FAILURE;
     }
-    string arg = static_cast<string>(argv[3]);
+    string arg = argv[3];
     if (arg.size() !=40)
     {
         return error("Invalid object hash.");

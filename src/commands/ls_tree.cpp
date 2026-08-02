@@ -31,7 +31,7 @@ int handleLsTree(int argc, char *argv[])
     //   <mode> <name>\0<20_byte_sha>
     //   <mode> <name>\0<20_byte_sha>
     int i = decompressed.find('\0') + 1;
-        while (i < decompressed.size()
+        while (i < decompressed.size())
         {
             if (decompressed[i] == ' ')
             {
