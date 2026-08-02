@@ -63,7 +63,7 @@ string write_tree_blob(const string &content)
     return sha;
 }
 
-std::pair<string, string> map_directory(path p, std::error_code  & ec) //passsing ec by refernce
+std::pair<string, string> map_directory(path p, std::error_code   ec) //passsing ec by refernce
 {
      string content = "";
      if (is_directory(p, ec))
